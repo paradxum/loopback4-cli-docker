@@ -22,7 +22,9 @@ services:
 Then just "docker-compose up"
 
 within your <projectname> directory you can also run commands like:
+```
 lb4 controller
 lb4 example
 lb4 discover
 etc....
+```
