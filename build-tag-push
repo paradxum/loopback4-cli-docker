@@ -1,0 +1,17 @@
+#!/bin/bash
+
+docker build --no-cache . -t loopback4-cli:latest
+
+VER=`docker run loopback4-cli:latest --version |grep "loopback/cli version:"|cut -d " " -f 3`
+LVER=`cat last_ver`
+if [[ "$VER" == "$LVER" ]]; then
+	echo "Same as previous version $VER = $LVER no need to update"
+	exit 0
+	fi
+
+echo "Updating to Version $VER"
+
+docker build . -t ericschultz/loopback4-cli:$VER -t ericschultz/loopback4-cli:latest
+
+docker push ericschultz/loopback4-cli:$VER
+docker push ericschultz/loopback4-cli:latest
